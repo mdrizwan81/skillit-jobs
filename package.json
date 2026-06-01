@@ -1,0 +1,8 @@
+{
+  "name": "skillit-jobs",
+  "version": "1.0.0",
+  "description": "Visa Sponsorship Job Finder by Skillit",
+  "engines": {
+    "node": "18.x"
+  }
+}

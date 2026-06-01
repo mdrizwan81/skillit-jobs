@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Find jobs from employers who offer visa sponsorship worldwide. Search thousands of sponsored positions by Skillit."/>
+<title>Skillit Jobs — Visa Sponsorship Job Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#08080f;color:#e2e0f0;min-height:100vh;-webkit-font-smoothing:antialiased}
+
+/* ── NAVBAR ── */
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,8,15,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:32px;height:32px;background:linear-gradient(135deg,#6b3cff,#f472b6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff}
+.nav-name{font-size:17px;font-weight:700;color:#f0eeff;letter-spacing:-0.02em}
+.nav-name span{color:#a78bfa}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-tag{font-size:11px;background:rgba(99,60,255,0.12);border:1px solid rgba(99,60,255,0.25);color:#a78bfa;padding:4px 10px;border-radius:100px;font-weight:500}
+.nav-count{font-size:12px;color:#5a5870}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:72px 20px 52px;background:radial-gradient(ellipse 80% 50% at 50% -5%,rgba(99,60,255,0.18) 0%,transparent 65%)}
+.hero-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(99,60,255,0.1);border:1px solid rgba(99,60,255,0.25);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:#a78bfa;margin-bottom:24px;letter-spacing:0.04em;text-transform:uppercase}
+.hero-pill-dot{width:6px;height:6px;border-radius:50%;background:#a78bfa;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-size:clamp(32px,5.5vw,58px);font-weight:700;color:#f0eeff;line-height:1.12;letter-spacing:-0.03em;margin-bottom:16px}
+.hero h1 .grad{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{color:#6b6880;font-size:17px;max-width:500px;margin:0 auto 44px;line-height:1.65;font-weight:300}
+
+/* ── SEARCH CARD ── */
+.search-card{max-width:680px;margin:0 auto;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:28px 28px 22px;backdrop-filter:blur(10px)}
+.search-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#5a5870;margin-bottom:10px}
+.search-row{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.search-row input{flex:1;min-width:200px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 16px;color:#e2e0f0;font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s,box-shadow 0.2s}
+.search-row input:focus{border-color:rgba(99,60,255,0.5);box-shadow:0 0 0 3px rgba(99,60,255,0.08)}
+.search-row input::placeholder{color:#3a3858}
+.search-row select{min-width:160px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:#c4c0d8;font-family:'Inter',sans-serif;font-size:14px;outline:none;cursor:pointer;transition:border-color 0.2s}
+.search-row select:focus{border-color:rgba(99,60,255,0.5)}
+.search-row select option{background:#1a1828}
+#searchBtn{background:linear-gradient(135deg,#6b3cff,#9b5fff);border:none;border-radius:12px;padding:12px 28px;color:#fff;font-size:15px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;white-space:nowrap;box-shadow:0 4px 20px rgba(107,60,255,0.4);transition:all 0.2s;min-width:120px}
+#searchBtn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 28px rgba(107,60,255,0.55)}
+#searchBtn:disabled{opacity:0.45;cursor:not-allowed;transform:none}
+.search-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.sponsor-note{display:flex;align-items:center;gap:7px;font-size:12px;color:#4a4870}
+.sdot{width:7px;height:7px;border-radius:50%;background:#1D9E75;flex-shrink:0;animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
+.search-stats{font-size:12px;color:#4a4870}
+
+/* ── FILTERS BAR ── */
+.filters{max-width:680px;margin:16px auto 0;display:flex;gap:8px;flex-wrap:wrap;padding:0 4px}
+.filter-chip{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:6px 14px;font-size:12px;color:#7b77a0;cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif}
+.filter-chip:hover,.filter-chip.active{background:rgba(99,60,255,0.12);border-color:rgba(99,60,255,0.3);color:#a78bfa}
+
+/* ── RESULTS ── */
+.results-section{max-width:720px;margin:44px auto 80px;padding:0 20px}
+.results-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.results-title{font-size:20px;font-weight:600;color:#f0eeff;letter-spacing:-0.01em}
+.results-meta{font-size:13px;color:#5a5870;text-align:right;line-height:1.5}
+.results-meta strong{color:#a78bfa;font-weight:600}
+
+/* ── JOB CARD ── */
+.job-card{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:22px 24px;margin-bottom:12px;transition:all 0.2s;animation:fadeUp 0.4s both ease-out;cursor:default}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.job-card:hover{border-color:rgba(99,60,255,0.2);background:rgba(99,60,255,0.025);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.card-top{display:flex;gap:14px;align-items:flex-start}
+.c-logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,rgba(99,60,255,0.2),rgba(244,114,182,0.1));border:1px solid rgba(99,60,255,0.15);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#a78bfa;flex-shrink:0;overflow:hidden;letter-spacing:-0.02em}
+.c-logo img{width:100%;height:100%;object-fit:contain;padding:5px}
+.c-meta{flex:1;min-width:0}
+.c-title{font-size:16px;font-weight:600;color:#f0eeff;margin-bottom:3px;line-height:1.3}
+.c-company{font-size:13px;color:#7b77a0;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.c-tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11px;padding:3px 10px;border-radius:100px;border:1px solid;white-space:nowrap;font-weight:500;letter-spacing:0.01em}
+.t-loc{background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.09);color:#6b6880}
+.t-type{background:rgba(99,60,255,0.09);border-color:rgba(99,60,255,0.22);color:#a78bfa}
+.t-remote{background:rgba(16,185,129,0.07);border-color:rgba(16,185,129,0.18);color:#34d399}
+.t-salary{background:rgba(251,191,36,0.07);border-color:rgba(251,191,36,0.18);color:#fbbf24}
+.t-sponsor{background:linear-gradient(135deg,rgba(99,60,255,0.1),rgba(244,114,182,0.07));border-color:rgba(244,114,182,0.22);color:#f0abff;font-weight:600}
+.c-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+.c-time{font-size:11px;color:#3a3858}
+.c-apply{background:linear-gradient(135deg,#6b3cff,#9b5fff);color:#fff;text-decoration:none;padding:9px 18px;border-radius:11px;font-size:13px;font-weight:600;box-shadow:0 3px 14px rgba(107,60,255,0.32);transition:all 0.2s;white-space:nowrap;display:inline-block}
+.c-apply:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(107,60,255,0.5)}
+.c-desc{font-size:13px;color:#6b6880;line-height:1.68;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05)}
+
+/* ── STATES ── */
+.state-box{text-align:center;padding:60px 20px;color:#5a5870}
+.state-icon{font-size:40px;margin-bottom:14px}
+.state-title{font-size:18px;color:#7b77a0;margin-bottom:10px;font-weight:500}
+.state-sub{font-size:14px;line-height:1.65;max-width:380px;margin:0 auto;color:#4a4870}
+.spinner{width:38px;height:38px;border:3px solid rgba(99,60,255,0.12);border-top-color:#a78bfa;border-radius:50%;animation:spin 0.75s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:#6b6880;line-height:1.6}
+.loading-text strong{color:#a78bfa;font-weight:600}
+.error-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.18);border-radius:14px;padding:14px 18px;color:#f87171;font-size:13px;margin-bottom:16px;line-height:1.55;display:none}
+
+/* ── FOOTER ── */
+.footer{border-top:1px solid rgba(255,255,255,0.05);padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-size:14px;font-weight:600;color:#3a3858}
+.footer-brand span{color:#6b3cff}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:#3a3858;text-decoration:none;transition:color 0.15s}
+.footer-links a:hover{color:#a78bfa}
+
+@media(max-width:600px){
+  .nav{padding:0 16px}
+  .hero{padding:52px 16px 40px}
+  .search-card{margin:0 16px;padding:20px 16px 18px;border-radius:18px}
+  .search-row{flex-direction:column}
+  .search-row input,.search-row select,#searchBtn{width:100%;min-width:unset}
+  .card-top{flex-wrap:wrap}
+  .c-right{flex-direction:row;width:100%;justify-content:space-between;align-items:center;margin-top:10px}
+  .results-header{flex-direction:column;align-items:flex-start;gap:4px}
+  .results-meta{text-align:left}
+  .footer{flex-direction:column;align-items:center;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <a class="nav-brand" href="/">
+    <div class="nav-logo">S</div>
+    <span class="nav-name">Skillit<span>Jobs</span></span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-tag">V1 — Launch</span>
+    <span class="nav-count" id="navCount"></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pill">
+    <div class="hero-pill-dot"></div>
+    Visa Sponsorship Job Finder
+  </div>
+  <h1>Land a job that<br/><span class="grad">sponsors your future</span></h1>
+  <p class="hero-sub">Search thousands of real job postings worldwide — only from employers who offer visa sponsorship and work permits.</p>
+
+  <!-- SEARCH CARD -->
+  <div class="search-card">
+    <div class="search-label">Search Jobs</div>
+    <div class="search-row">
+      <input type="text" id="q" placeholder="Job title e.g. Graphic Designer, Data Analyst..." autocomplete="off"/>
+      <select id="country">
+        <option value="AE">🇦🇪 UAE</option>
+        <option value="AU">🇦🇺 Australia</option>
+        <option value="AT">🇦🇹 Austria</option>
+        <option value="BE">🇧🇪 Belgium</option>
+        <option value="CA">🇨🇦 Canada</option>
+        <option value="CY">🇨🇾 Cyprus</option>
+        <option value="CZ">🇨🇿 Czech Republic</option>
+        <option value="DK">🇩🇰 Denmark</option>
+        <option value="FI">🇫🇮 Finland</option>
+        <option value="FR">🇫🇷 France</option>
+        <option value="DE">🇩🇪 Germany</option>
+        <option value="GR">🇬🇷 Greece</option>
+        <option value="HK">🇭🇰 Hong Kong</option>
+        <option value="IE">🇮🇪 Ireland</option>
+        <option value="IT">🇮🇹 Italy</option>
+        <option value="JP">🇯🇵 Japan</option>
+        <option value="LU">🇱🇺 Luxembourg</option>
+        <option value="MY">🇲🇾 Malaysia</option>
+        <option value="MT">🇲🇹 Malta</option>
+        <option value="MX">🇲🇽 Mexico</option>
+        <option value="NL">🇳🇱 Netherlands</option>
+        <option value="NZ">🇳🇿 New Zealand</option>
+        <option value="NO">🇳🇴 Norway</option>
+        <option value="PL">🇵🇱 Poland</option>
+        <option value="PT">🇵🇹 Portugal</option>
+        <option value="SG">🇸🇬 Singapore</option>
+        <option value="ZA">🇿🇦 South Africa</option>
+        <option value="KR">🇰🇷 South Korea</option>
+        <option value="ES">🇪🇸 Spain</option>
+        <option value="SE">🇸🇪 Sweden</option>
+        <option value="CH">🇨🇭 Switzerland</option>
+        <option value="GB">🇬🇧 United Kingdom</option>
+        <option value="US">🇺🇸 United States</option>
+      </select>
+      <button id="searchBtn" onclick="doSearch()">Search</button>
+    </div>
+    <div class="search-footer">
+      <div class="sponsor-note">
+        <div class="sdot"></div>
+        Only showing roles with visa sponsorship or work permit support
+      </div>
+      <div class="search-stats" id="searchStats"></div>
+    </div>
+  </div>
+
+  <!-- QUICK FILTERS -->
+  <div class="filters">
+    <button class="filter-chip active" onclick="setType('')">All Types</button>
+    <button class="filter-chip" onclick="setType('FULLTIME')">Full-time</button>
+    <button class="filter-chip" onclick="setType('PARTTIME')">Part-time</button>
+    <button class="filter-chip" onclick="setType('CONTRACTOR')">Contract</button>
+    <button class="filter-chip" onclick="setRemote(true)">Remote Only</button>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results-section">
+  <div id="errorBox" class="error-box"></div>
+  <div id="resultsHeader" class="results-header" style="display:none">
+    <div class="results-title" id="resultsTitle"></div>
+    <div class="results-meta" id="resultsMeta"></div>
+  </div>
+  <div id="resultsBody">
+    <div class="state-box">
+      <div class="state-icon">🌍</div>
+      <div class="state-title">Ready to find your opportunity</div>
+      <div class="state-sub">Enter a job title above and select your target country to discover sponsored positions worldwide.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">Skillit<span>Jobs</span> &nbsp;·&nbsp; V1</div>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  let allJobs = [];
+  let activeType = '';
+  let activeRemote = false;
+
+  function ini(name) {
+    if (!name) return '?';
+    return name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+  }
+
+  function timeAgo(dateStr) {
+    if (!dateStr) return '';
+    try {
+      const diff = Math.floor((Date.now() - new Date(dateStr)) / 1000);
+      if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+      if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+      if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+      return new Date(dateStr).toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+    } catch(e) { return ''; }
+  }
+
+  function countryName(code) {
+    const opt = document.querySelector(`#country option[value="${code}"]`);
+    return opt ? opt.textContent.replace(/^[^\s]+\s/, '') : code;
+  }
+
+  function setType(type) {
+    activeType = type;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    activeRemote = false;
+    renderJobs(filterJobs());
+  }
+
+  function setRemote(val) {
+    activeRemote = val;
+    activeType = '';
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    event.target.classList.add('active');
+    renderJobs(filterJobs());
+  }
+
+  function filterJobs() {
+    return allJobs.filter(j => {
+      if (activeType && j.job_employment_type !== activeType) return false;
+      if (activeRemote && !j.job_is_remote) return false;
+      return true;
+    });
+  }
+
+  function renderJobs(jobs) {
+    const eb = document.getElementById('errorBox');
+    eb.style.display = 'none';
+
+    if (!jobs || jobs.length === 0) {
+      document.getElementById('resultsHeader').style.display = 'none';
+      document.getElementById('resultsBody').innerHTML = `
+        <div class="state-box">
+          <div class="state-icon">🔭</div>
+          <div class="state-title">No sponsored roles found</div>
+          <div class="state-sub">Try a broader job title or a different country. Sponsorship listings can be limited in smaller markets.</div>
+        </div>`;
+      return;
+    }
+
+    document.getElementById('resultsHeader').style.display = 'flex';
+    const q = document.getElementById('q').value.trim();
+    const cName = countryName(document.getElementById('country').value);
+    document.getElementById('resultsTitle').textContent = `"${q}" in ${cName}`;
+    document.getElementById('resultsMeta').innerHTML = `<strong>${jobs.length}</strong> sponsored position${jobs.length === 1 ? '' : 's'} found`;
+    document.getElementById('navCount').textContent = jobs.length + ' results';
+
+    document.getElementById('resultsBody').innerHTML = jobs.map((j, i) => {
+      const logoHtml = j.employer_logo
+        ? `<img src="${j.employer_logo}" alt="${j.employer_name || ''}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        : '';
+      const fallback = `<span style="${j.employer_logo ? 'display:none' : ''}">${ini(j.employer_name)}</span>`;
+
+      const loc = [j.job_city, j.job_country].filter(Boolean).join(', ');
+      const type = j.job_employment_type ? j.job_employment_type.replace(/_/g,' ') : '';
+      const salary = (j.job_min_salary && j.job_max_salary)
+        ? `$${Math.round(j.job_min_salary/1000)}k–$${Math.round(j.job_max_salary/1000)}k`
+        : j.job_min_salary ? `From $${Math.round(j.job_min_salary/1000)}k` : '';
+      const desc = j.job_description
+        ? j.job_description.replace(/[<>]/g,'').slice(0,240) + (j.job_description.length > 240 ? '…' : '')
+        : '';
+
+      return `<div class="job-card" style="animation-delay:${i*0.055}s">
+        <div class="card-top">
+          <div class="c-logo">${logoHtml}${fallback}</div>
+          <div class="c-meta">
+            <div class="c-title">${j.job_title || 'Role'}</div>
+            <div class="c-company">${j.employer_name || ''}</div>
+            <div class="c-tags">
+              ${loc ? `<span class="tag t-loc">📍 ${loc}</span>` : ''}
+              ${type ? `<span class="tag t-type">${type}</span>` : ''}
+              ${j.job_is_remote ? `<span class="tag t-remote">🌐 Remote</span>` : ''}
+              ${salary ? `<span class="tag t-salary">💰 ${salary}</span>` : ''}
+              <span class="tag t-sponsor">✈️ Visa Sponsorship</span>
+            </div>
+          </div>
+          <div class="c-right">
+            ${j.job_posted_at_datetime_utc ? `<span class="c-time">${timeAgo(j.job_posted_at_datetime_utc)}</span>` : ''}
+            ${j.job_apply_link ? `<a class="c-apply" href="${j.job_apply_link}" target="_blank" rel="noopener">Apply →</a>` : ''}
+          </div>
+        </div>
+        ${desc ? `<div class="c-desc">${desc}</div>` : ''}
+      </div>`;
+    }).join('');
+  }
+
+  async function doSearch() {
+    const q = document.getElementById('q').value.trim();
+    const country = document.getElementById('country').value;
+    if (!q) { document.getElementById('q').focus(); return; }
+
+    activeType = '';
+    activeRemote = false;
+    document.querySelectorAll('.filter-chip').forEach((c,i) => {
+      c.classList.toggle('active', i===0);
+    });
+
+    document.getElementById('searchBtn').disabled = true;
+    document.getElementById('resultsHeader').style.display = 'none';
+    document.getElementById('errorBox').style.display = 'none';
+    document.getElementById('navCount').textContent = '';
+    document.getElementById('searchStats').textContent = '';
+    document.getElementById('resultsBody').innerHTML = `
+      <div class="state-box">
+        <div class="spinner"></div>
+        <div class="loading-text">Searching for <strong>${q}</strong> roles in <strong>${countryName(country)}</strong> with visa sponsorship…</div>
+      </div>`;
+
+    try {
+      const res = await fetch(`/api/search?query=${encodeURIComponent(q)}&country=${country}`);
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || `Server error (${res.status})`);
+      }
+      const data = await res.json();
+      allJobs = data.data || [];
+      const start = Date.now();
+      document.getElementById('searchStats').textContent = `${allJobs.length} results · ${((Date.now()-start)/1000).toFixed(1)}s`;
+      renderJobs(allJobs);
+    } catch(err) {
+      document.getElementById('resultsBody').innerHTML = '';
+      document.getElementById('resultsHeader').style.display = 'none';
+      const eb = document.getElementById('errorBox');
+      eb.style.display = 'block';
+      eb.textContent = '⚠️ ' + (err.message || 'Search failed. Please try again.');
+    } finally {
+      document.getElementById('searchBtn').disabled = false;
+    }
+  }
+
+  document.getElementById('q').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doSearch();
+  });
+</script>
+</body>
+</html>
